@@ -1,8 +1,4 @@
 # SYNOPSIS
-[![NPM Package](https://img.shields.io/npm/v/merkle-patricia-tree.svg?style=flat-square)](https://www.npmjs.org/package/merkle-patricia-tree)
-[![Build Status](https://img.shields.io/travis/ethereumjs/merkle-patricia-tree.svg?branch=master&style=flat-square)](https://travis-ci.org/ethereumjs/merkle-patricia-tree)
-[![Coverage Status](https://img.shields.io/coveralls/ethereumjs/merkle-patricia-tree.svg?style=flat-square)](https://coveralls.io/r/ethereumjs/merkle-patricia-tree)
-[![Gitter](https://img.shields.io/gitter/room/ethereum/ethereumjs-lib.svg?style=flat-square)](https://gitter.im/ethereum/ethereumjs-lib) or #ethereumjs on freenode  
 
 [![js-standard-style](https://cdn.rawgit.com/feross/standard/master/badge.svg)](https://github.com/feross/standard)  
 
@@ -46,7 +42,7 @@ Trie.prove(trie, 'test', function (err, prove) {
 })
 ```
 
-## Read stream on Geth DB
+## Read stream on Gpuffs DB
 
 ```javascript
 var level = require('level')
@@ -54,7 +50,7 @@ var Trie = require('./secure')
 
 var stateRoot = "0xd7f8974fb5ac78d9ac099b9ad5018bedc2ce0a72dad1827a1709da30580f0544" // Block #222
 
-var db = level('YOUR_PATH_TO_THE_GETH_CHAIN_DB')
+var db = level('YOUR_PATH_TO_THE_GPUFFS_CHAIN_DB')
 var trie = new Trie(db, stateRoot)
 
 trie.createReadStream()
