@@ -1,4 +1,4 @@
-const ethUtil = require('ethereumjs-util')
+const puffsUtil = require('puffscoinjs-util')
 const CheckpointTrie = require('./checkpointTrie')
 
 /**
@@ -15,12 +15,12 @@ module.exports = class SecureTrie extends CheckpointTrie {
   }
 
   static prove (trie, key, cb) {
-    const hash = ethUtil.keccak256(key)
+    const hash = puffsUtil.keccak256(key)
     super.prove(trie, hash, cb)
   }
 
   static verifyProof (rootHash, key, proof, cb) {
-    const hash = ethUtil.keccak256(key)
+    const hash = puffsUtil.keccak256(key)
     super.verifyProof(rootHash, hash, proof, cb)
   }
 
@@ -30,7 +30,7 @@ module.exports = class SecureTrie extends CheckpointTrie {
   }
 
   get (key, cb) {
-    const hash = ethUtil.keccak256(key)
+    const hash = puffsUtil.keccak256(key)
     super.get(hash, cb)
   }
 
@@ -42,13 +42,13 @@ module.exports = class SecureTrie extends CheckpointTrie {
     if (!val) {
       this.del(key, cb)
     } else {
-      const hash = ethUtil.keccak256(key)
+      const hash = puffsUtil.keccak256(key)
       super.put(hash, val, cb)
     }
   }
 
   del (key, cb) {
-    const hash = ethUtil.keccak256(key)
+    const hash = puffsUtil.keccak256(key)
     super.del(hash, cb)
   }
 }
