@@ -1,7 +1,7 @@
 const assert = require('assert')
 const async = require('async')
 const rlp = require('rlp')
-const ethUtil = require('ethereumjs-util')
+const puffsUtil = require('puffscoinjs-util')
 const semaphore = require('semaphore')
 const DB = require('./db')
 const TrieNode = require('./trieNode')
@@ -11,7 +11,7 @@ const { callTogether } = require('./util/async')
 const { stringToNibbles, matchingNibbleLength, doKeysMatch } = require('./util/nibbles')
 
 /**
- * Use `require('merkel-patricia-tree')` for the base interface. In Ethereum applications
+ * Use `require('merkel-patricia-tree')` for the base interface. In PUFFScoin applications
  * stick with the Secure Trie Overlay `require('merkel-patricia-tree/secure')`.
  * The API for the raw and the secure interface are about the same
  * @class Trie
@@ -25,7 +25,7 @@ const { stringToNibbles, matchingNibbleLength, doKeysMatch } = require('./util/n
 module.exports = class Trie {
   constructor (db, root) {
     const self = this
-    this.EMPTY_TRIE_ROOT = ethUtil.SHA3_RLP
+    this.EMPTY_TRIE_ROOT = puffsUtil.SHA3_RLP
     this.sem = semaphore(1)
 
     this.db = db || new DB()
@@ -33,7 +33,7 @@ module.exports = class Trie {
     Object.defineProperty(this, 'root', {
       set (value) {
         if (value) {
-          value = ethUtil.toBuffer(value)
+          value = puffsUtil.toBuffer(value)
           assert(value.length === 32, 'Invalid root length. Roots are 32 bytes')
         } else {
           value = self.EMPTY_TRIE_ROOT
@@ -57,7 +57,7 @@ module.exports = class Trie {
    * @param {Function} cb A callback `Function` which is given the arguments `err` - for errors that may have occured and `value` - the found value in a `Buffer` or if no value was found `null`
    */
   get (key, cb) {
-    key = ethUtil.toBuffer(key)
+    key = puffsUtil.toBuffer(key)
 
     this.findPath(key, (err, node, remainder, stack) => {
       let value = null
@@ -79,8 +79,8 @@ module.exports = class Trie {
    * @param {Function} cb A callback `Function` which is given the argument `err` - for errors that may have occured
    */
   put (key, value, cb) {
-    key = ethUtil.toBuffer(key)
-    value = ethUtil.toBuffer(value)
+    key = puffsUtil.toBuffer(key)
+    value = puffsUtil.toBuffer(value)
 
     if (!value || value.toString() === '') {
       this.del(key, cb)
@@ -88,7 +88,7 @@ module.exports = class Trie {
       cb = callTogether(cb, this.sem.leave)
 
       this.sem.take(() => {
-        if (this.root.toString('hex') !== ethUtil.SHA3_RLP.toString('hex')) {
+        if (this.root.toString('hex') !== puffsUtil.SHA3_RLP.toString('hex')) {
           // first try to find the give key or its nearst node
           this.findPath(key, (err, foundValue, keyRemainder, stack) => {
             if (err) {
@@ -112,7 +112,7 @@ module.exports = class Trie {
    * @param {Function} callback the callback `Function`
    */
   del (key, cb) {
-    key = ethUtil.toBuffer(key)
+    key = puffsUtil.toBuffer(key)
     cb = callTogether(cb, this.sem.leave)
 
     this.sem.take(() => {
@@ -373,7 +373,7 @@ module.exports = class Trie {
     let aborted = false
     let returnValues = []
 
-    if (root.toString('hex') === ethUtil.SHA3_RLP.toString('hex')) {
+    if (root.toString('hex') === puffsUtil.SHA3_RLP.toString('hex')) {
       return onDone()
     }
 
@@ -707,7 +707,7 @@ module.exports = class Trie {
    * @param {Function} cb
    */
   checkRoot (root, cb) {
-    root = ethUtil.toBuffer(root)
+    root = puffsUtil.toBuffer(root)
     this._lookupNode(root, (e, value) => {
       cb(null, !!value)
     })
