@@ -1,5 +1,5 @@
 const TrieNode = require('./trieNode')
-const ethUtil = require('ethereumjs-util')
+const puffsUtil = require('puffscoinjs-util')
 const { stringToNibbles, matchingNibbleLength } = require('./util/nibbles')
 
 /**
@@ -38,14 +38,14 @@ exports.prove = function (trie, key, cb) {
  */
 exports.verifyProof = function (rootHash, key, proof, cb) {
   key = stringToNibbles(key)
-  var wantHash = ethUtil.toBuffer(rootHash)
+  var wantHash = puffsUtil.toBuffer(rootHash)
   for (var i = 0; i < proof.length; i++) {
-    var p = ethUtil.toBuffer(proof[i])
-    var hash = ethUtil.sha3(proof[i])
+    var p = puffsUtil.toBuffer(proof[i])
+    var hash = puffsUtil.sha3(proof[i])
     if (Buffer.compare(hash, wantHash)) {
       return cb(new Error('Bad proof node ' + i + ': hash mismatch'))
     }
-    var node = new TrieNode(ethUtil.rlp.decode(p))
+    var node = new TrieNode(puffsUtil.rlp.decode(p))
     var cld
     if (node.type === 'branch') {
       if (key.length === 0) {
