@@ -2,7 +2,7 @@ const Trie = require('../src/index.js')
 const async = require('async')
 const rlp = require('rlp')
 const tape = require('tape')
-const ethUtil = require('ethereumjs-util')
+const puffsUtil = require('puffscoinjs-util')
 
 tape('simple save and retrive', function (tester) {
   var it = tester.test
@@ -231,7 +231,7 @@ tape('testing deletions cases', function (tester) {
   })
 })
 
-tape('it should create the genesis state root from ethereum', function (tester) {
+tape('it should create the genesis state root from PUFFScoin', function (tester) {
   var it = tester.test
   var trie4 = new Trie()
   var g = new Buffer('8a40bfaa73256b60764c1bf40675a99083efb075', 'hex')
@@ -244,7 +244,7 @@ tape('it should create the genesis state root from ethereum', function (tester) 
   var startAmount = new Buffer(26)
   startAmount.fill(0)
   startAmount[0] = 1
-  var account = [startAmount, 0, stateRoot, ethUtil.sha3()]
+  var account = [startAmount, 0, stateRoot, puffsUtil.sha3()]
   var rlpAccount = rlp.encode(account)
   var cppRlp = 'f85e9a010000000000000000000000000000000000000000000000000080a00000000000000000000000000000000000000000000000000000000000000000a0c5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470'
 
