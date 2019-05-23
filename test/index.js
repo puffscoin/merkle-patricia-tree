@@ -248,7 +248,7 @@ tape('it should create the genesis state root from ethereum', function (tester) 
   var rlpAccount = rlp.encode(account)
   var cppRlp = 'f85e9a010000000000000000000000000000000000000000000000000080a00000000000000000000000000000000000000000000000000000000000000000a0c5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470'
 
-  var genesisStateRoot = '2f4399b08efe68945c1cf90ffe85bbe3ce978959da753f9e649f034015b8817d'
+  var genesisStateRoot = 'b4973da140b05bfffb1cd734ed871f888e71cf563a4218f82a092fc4540f6c03'
   tester.equal(cppRlp, rlpAccount.toString('hex'))
 
   it('shall match the root', function (t) {
