@@ -1,5 +1,5 @@
 const rlp = require('rlp')
-const ethUtil = require('ethereumjs-util')
+const puffsUtil = require('puffscoinjs-util')
 const { stringToNibbles, nibblesToBuffer } = require('./util/nibbles')
 const { isTerminator, addHexPrefix, removeHexPrefix } = require('./util/hex')
 
@@ -126,7 +126,7 @@ module.exports = class TrieNode {
   }
 
   hash () {
-    return ethUtil.sha3(this.serialize())
+    return puffsUtil.sha3(this.serialize())
   }
 
   toString () {
