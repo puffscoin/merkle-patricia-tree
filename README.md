@@ -48,7 +48,7 @@ Trie.prove(trie, 'test', function (err, prove) {
 var level = require('level')
 var Trie = require('./secure')
 
-var stateRoot = "0xd7f8974fb5ac78d9ac099b9ad5018bedc2ce0a72dad1827a1709da30580f0544" // Block #222
+var stateRoot = "0xb4973da140b05bfffb1cd734ed871f888e71cf563a4218f82a092fc4540f6c03" // Block #0
 
 var db = level('YOUR_PATH_TO_THE_GPUFFS_CHAIN_DB')
 var trie = new Trie(db, stateRoot)
@@ -76,11 +76,9 @@ trie.createReadStream()
 - ["Understanding the ethereum trie"](https://easythereentropy.wordpress.com/2014/06/04/understanding-the-ethereum-trie/) blog post
 - ["Trie and Patricia Trie Overview"](https://www.youtube.com/watch?v=jXAHLqQthKw&t=26s) Video Talk on Youtube
 
-# EthereumJS
+# PuffscoinJS
 
-See our organizational [documentation](https://ethereumjs.readthedocs.io) for an introduction to `EthereumJS` as well as information on current standards and best practices.
-
-If you want to join for work or do improvements on the libraries have a look at our [contribution guidelines](https://ethereumjs.readthedocs.io/en/latest/contributing.html).
+See our organizational [documentation](http://puffscoin.leafycauldronapothecary.com/puffwiki/puffscoinjs-user-guide/) for an introduction to `PuffscoinJS`.
 
 # LICENSE
 MPL-2.0
