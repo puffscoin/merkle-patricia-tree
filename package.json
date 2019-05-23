@@ -35,7 +35,7 @@
     "merkle",
     "radix",
     "trie",
-    "ethereum"
+    "puffscoin"
   ],
   "license": "MPL-2.0",
   "dependencies": {
