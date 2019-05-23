@@ -26,10 +26,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/ethereumjs/merkle-patricia-tree.git"
+    "url": "https://github.com/puffscoin/merkle-patricia-tree.git"
   },
   "bugs": {
-    "url": "https://github.com/ethereumjs/merkle-patricia-tree/issues"
+    "url": "https://github.com/puffscoin/merkle-patricia-tree/issues"
   },
   "keywords": [
     "merkle",
@@ -40,7 +40,7 @@
   "license": "MPL-2.0",
   "dependencies": {
     "async": "^2.6.1",
-    "ethereumjs-util": "^5.2.0",
+    "puffscoinjs-util": "^5.2.0",
     "level-mem": "^3.0.1",
     "level-ws": "^1.0.0",
     "readable-stream": "^3.0.6",
