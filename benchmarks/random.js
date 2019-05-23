@@ -1,7 +1,7 @@
 // https://github.com/ethereum/wiki/wiki/Benchmarks
 'use strict'
 const Trie = require('../')
-const ethUtil = require('ethereumjs-util')
+const puffsUtil = require('puffscoinjs-util')
 const async = require('async')
 
 const ROUNDS = 1000
@@ -25,11 +25,11 @@ function run (cb) {
       return i <= ROUNDS
     },
     function (done) {
-      seed = ethUtil.sha3(seed)
+      seed = puffsUtil.sha3(seed)
       if (SYMMETRIC) {
         trie.put(seed, seed, genRoot)
       } else {
-        let val = ethUtil.sha3(seed)
+        let val = puffsUtil.sha3(seed)
         trie.put(seed, val, genRoot)
       }
 
